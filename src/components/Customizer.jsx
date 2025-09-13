@@ -22,51 +22,53 @@ export default function Customizer() {
       </button>
 
       {/* Dropdown Content */}
-      {open && (
-        <div className="mt-2 p-4 bg-white rounded-lg shadow-lg space-y-4">
-          {/* Mesh Variant Selector */}
-          <div>
-            <p className="font-semibold mb-2">Choose Edge Type:</p>
-            <div className="flex gap-2 flex-wrap">
-              {c.variants.map((variant) => (
-                <button
-                  key={variant}
-                  className={`px-3 py-1 rounded ${
-                    c.activeMesh === variant
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-200"
-                  }`}
-                  onClick={() =>
-                    (state.customizations.counterTop.activeMesh = variant)
-                  }
-                >
-                  {variant}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Texture Selector */}
-          <div>
-            <p className="font-semibold mb-2">Choose Texture:</p>
-            <div className="flex gap-2 flex-wrap">
-              {c.textures.map((tex) => (
-                <img
-                  key={tex}
-                  src={tex}
-                  alt="texture"
-                  className={`w-16 h-16 rounded cursor-pointer border ${
-                    c.texture === tex ? "ring-2 ring-blue-500" : ""
-                  }`}
-                  onClick={() =>
-                    (state.customizations.counterTop.texture = tex)
-                  }
-                />
-              ))}
-            </div>
+      <div
+        className={`mt-2 p-4 bg-white rounded-lg shadow-lg space-y-4 transform transition-all duration-300 origin-top ${
+          open
+            ? "opacity-100 scale-100 max-h-[500px]"
+            : "opacity-0 scale-95 max-h-0 overflow-hidden"
+        }`}
+      >
+        {/* Mesh Variant Selector */}
+        <div>
+          <p className="font-semibold mb-2">Choose Edge Type:</p>
+          <div className="flex gap-2 flex-wrap">
+            {c.variants.map((variant) => (
+              <button
+                key={variant}
+                className={`px-3 py-1 rounded ${
+                  c.activeMesh === variant
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200"
+                }`}
+                onClick={() =>
+                  (state.customizations.counterTop.activeMesh = variant)
+                }
+              >
+                {variant}
+              </button>
+            ))}
           </div>
         </div>
-      )}
+
+        {/* Texture Selector */}
+        <div>
+          <p className="font-semibold mb-2">Choose Texture:</p>
+          <div className="flex gap-2 flex-wrap">
+            {c.textures.map((tex) => (
+              <img
+                key={tex}
+                src={tex}
+                alt="texture"
+                className={`w-16 h-16 rounded cursor-pointer border ${
+                  c.texture === tex ? "ring-2 ring-blue-500" : ""
+                }`}
+                onClick={() => (state.customizations.counterTop.texture = tex)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
